@@ -1,46 +1,112 @@
-import React, { useState } from "react";
-
-// const Clickeado = () => {
-// 	if (squareClick[1] == undefined) {
-// 		return <div></div>;
-// 	} else if (squareClick[1] != undefined) {
-// 		return <div>1</div>;
-// 	}
-// };
-
-let squareClick = [];
-
-const Clickeado = evento => {
-	if (squareClick[1] == undefined) {
-		return <div></div>;
-	} else if (squareClick[1] != undefined) {
-		console.log(`Hola desde ${evento} ${squareClick[1]}`);
-		Home();
-		return <div>2</div>;
-	}
-};
-
-const Click = (casilla, evento) => {
-	let aux;
-	for (let x in squareClick) {
-		// aux = squareClick[x] == casilla ? (aux = "") : (aux = casilla);
-		if (squareClick[x] == casilla) {
-			aux = "";
-			break;
-		} else {
-			aux = casilla;
-		}
-	}
-	// aux == "" ? console.log("nada") : (squareClick.push(aux));
-	if (aux != "") {
-		squareClick.push(aux);
-		Clickeado(evento);
-	}
-};
+import React, { useState, useEffect } from "react";
 
 export function Home() {
+	const [marca, setMarca] = useState(true);
+	const [d0, setD0] = useState("");
+	const [d1, setD1] = useState("");
+	const [d2, setD2] = useState("");
+	const [d3, setD3] = useState("");
+	const [d4, setD4] = useState("");
+	const [d5, setD5] = useState("");
+	const [d6, setD6] = useState("");
+	const [d7, setD7] = useState("");
+	const [d8, setD8] = useState("");
+	const [divWin, setDivWin] = useState(true);
+	const [divInicio, setDivInicio] = useState(true);
+	const listaDivs = [d0, d1, d2, d3, d4, d5, d6, d7, d8];
+
+	let lista = [
+		"topLeft",
+		"topCenter",
+		"topRight",
+		"middleLeft",
+		"middleCenter",
+		"middleRight",
+		"bottomLeft",
+		"bottomCenter",
+		"bottomRight"
+	];
+
+	useEffect(() => {
+		if (
+			(d0 == d1 && d0 == d2 && d0 != "") ||
+			(d3 == d4 && d3 == d5 && d3 != "") ||
+			(d6 == d7 && d6 == d8 && d6 != "") ||
+			(d0 == d3 && d0 == d6 && d0 != "") ||
+			(d1 == d4 && d1 == d7 && d1 != "") ||
+			(d2 == d5 && d2 == d8 && d2 != "") ||
+			(d0 == d4 && d0 == d8 && d0 != "") ||
+			(d2 == d4 && d2 == d6 && d2 != "")
+		) {
+			console.log("Hola desde if");
+			setDivWin(false);
+		}
+		// if (d0 != "" || d2 != "" || d6 != "" || d8 != "") {
+
+		// }
+	}, [listaDivs]);
+
+	const Handler = evento => {
+		let id = evento.target.id;
+		console.log(listaDivs);
+		if (id == 0 && d0 == "") {
+			let div0 = "X";
+			marca ? (div0 = "X") : (div0 = "O");
+			setD0(div0);
+		} else if (id == 1 && d1 == "") {
+			let div1 = "X";
+			marca ? (div1 = "X") : (div1 = "O");
+			setD1(div1);
+		} else if (id == 2 && d2 == "") {
+			let div2 = "X";
+			marca ? (div2 = "X") : (div2 = "O");
+			setD2(div2);
+		} else if (id == 3 && d3 == "") {
+			let div3 = "X";
+			marca ? (div3 = "X") : (div3 = "O");
+			setD3(div3);
+		} else if (id == 4 && d4 == "") {
+			let div4 = "X";
+			marca ? (div4 = "X") : (div4 = "O");
+			setD4(div4);
+		} else if (id == 5 && d5 == "") {
+			let div5 = "X";
+			marca ? (div5 = "X") : (div5 = "O");
+			setD5(div5);
+		} else if (id == 6 && d6 == "") {
+			let div6 = "X";
+			marca ? (div6 = "X") : (div6 = "O");
+			setD6(div6);
+		} else if (id == 7 && d7 == "") {
+			let div7 = "X";
+			marca ? (div7 = "X") : (div7 = "O");
+			setD7(div7);
+		} else if (id == 8 && d8 == "") {
+			let div8 = "X";
+			marca ? (div8 = "X") : (div8 = "O");
+			setD8(div8);
+		}
+		setMarca(!marca);
+	};
+
+	const SecondHandler = evento => {
+		setDivInicio(false);
+	};
+
+	const DivTicToe = lista.map((divs, index) => {
+		return (
+			<div
+				key={index}
+				id={index}
+				onClick={Handler}
+				className={`marcado ${divs}`}>
+				{listaDivs[index]}
+			</div>
+		);
+	});
+
 	return (
-		<div className="text-center bg-secondary">
+		<div className="text-center">
 			<div className="superior text-white">
 				<h1>
 					<div className="display-4 d-inline">Tic Tac Toe</div> in
@@ -50,66 +116,59 @@ export function Home() {
 			<div className="central d-flex justify-content-center py-3">
 				<div className="game">
 					<div
-						onClick={e => Click(1, e.target.className)}
-						className="topLeft">
-						<div>
-							<Clickeado />
+						className="inicio text-center"
+						style={
+							divInicio ? { display: "" } : { display: "none" }
+						}>
+						<div className="bg-light text-dark p-5 my-1">
+							<h1>
+								Para Jugar, por favor Ingresa los Nombres de los
+								Jugadores
+							</h1>
+							<div className="input-group mb-3">
+								<div className="input-group-prepend">
+									<span
+										className="input-group-text"
+										id="basic-addon1">
+										1
+									</span>
+								</div>
+								<input
+									type="text"
+									className="form-control"
+									placeholder="Nombre"
+									aria-label="Username"
+									aria-describedby="basic-addon1"
+								/>
+							</div>
+							<div className="input-group mb-3">
+								<div className="input-group-prepend">
+									<span
+										className="input-group-text"
+										id="basic-addon1">
+										2
+									</span>
+								</div>
+								<input
+									type="text"
+									className="form-control"
+									placeholder="Nombre"
+									aria-label="Username"
+									aria-describedby="basic-addon1"
+								/>
+							</div>
+							<button onClick={SecondHandler}>Jugar</button>
 						</div>
 					</div>
+					{DivTicToe}
 					<div
-						onClick={e => Click(2, e.target.className)}
-						className="topCenter">
-						<div>
-							<Clickeado />
-						</div>
-					</div>
-					<div
-						onClick={e => Click(3, e.target.className)}
-						className="topRight">
-						<div>
-							<Clickeado />
-						</div>
-					</div>
-					<div
-						onClick={e => Click(4, e.target.className)}
-						className="middleLeft">
-						<div>
-							<Clickeado />
-						</div>
-					</div>
-					<div
-						onClick={e => Click(5, e.target.className)}
-						className="middleCenter">
-						<div>
-							<Clickeado />
-						</div>
-					</div>
-					<div
-						onClick={e => Click(6, e.target.className)}
-						className="middleRight">
-						<div>
-							<Clickeado />
-						</div>
-					</div>
-					<div
-						onClick={e => Click(7, e.target.className)}
-						className="bottomLeft">
-						<div>
-							<Clickeado />
-						</div>
-					</div>
-					<div
-						onClick={e => Click(8, e.target.className)}
-						className="bottomCenter">
-						<div>
-							<Clickeado />
-						</div>
-					</div>
-					<div
-						onClick={e => Click(9, e.target.className)}
-						className="bottomRight">
-						<div>
-							<Clickeado />
+						className="fin text-center"
+						style={divWin ? { display: "none" } : { display: "" }}>
+						<div className="bg-light text-dark my-5 p-5">
+							<h1>Has Ganado!</h1>
+							<button>
+								<a href="/">Reiniciar</a>
+							</button>
 						</div>
 					</div>
 				</div>
