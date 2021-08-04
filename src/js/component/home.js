@@ -38,55 +38,59 @@ export function Home() {
 			(d0 == d4 && d0 == d8 && d0 != "") ||
 			(d2 == d4 && d2 == d6 && d2 != "")
 		) {
-			console.log("Hola desde if");
 			setDivWin(false);
 		}
-		// if (d0 != "" || d2 != "" || d6 != "" || d8 != "") {
-
-		// }
 	}, [listaDivs]);
 
 	const Handler = evento => {
 		let id = evento.target.id;
-		console.log(listaDivs);
 		if (id == 0 && d0 == "") {
 			let div0 = "X";
 			marca ? (div0 = "X") : (div0 = "O");
 			setD0(div0);
+			setMarca(!marca);
 		} else if (id == 1 && d1 == "") {
 			let div1 = "X";
 			marca ? (div1 = "X") : (div1 = "O");
 			setD1(div1);
+			setMarca(!marca);
 		} else if (id == 2 && d2 == "") {
 			let div2 = "X";
 			marca ? (div2 = "X") : (div2 = "O");
 			setD2(div2);
+			setMarca(!marca);
 		} else if (id == 3 && d3 == "") {
 			let div3 = "X";
 			marca ? (div3 = "X") : (div3 = "O");
 			setD3(div3);
+			setMarca(!marca);
 		} else if (id == 4 && d4 == "") {
 			let div4 = "X";
 			marca ? (div4 = "X") : (div4 = "O");
 			setD4(div4);
+			setMarca(!marca);
 		} else if (id == 5 && d5 == "") {
 			let div5 = "X";
+			setMarca(!marca);
 			marca ? (div5 = "X") : (div5 = "O");
 			setD5(div5);
+			setMarca(!marca);
 		} else if (id == 6 && d6 == "") {
 			let div6 = "X";
 			marca ? (div6 = "X") : (div6 = "O");
 			setD6(div6);
+			setMarca(!marca);
 		} else if (id == 7 && d7 == "") {
 			let div7 = "X";
 			marca ? (div7 = "X") : (div7 = "O");
 			setD7(div7);
+			setMarca(!marca);
 		} else if (id == 8 && d8 == "") {
 			let div8 = "X";
 			marca ? (div8 = "X") : (div8 = "O");
 			setD8(div8);
+			setMarca(!marca);
 		}
-		setMarca(!marca);
 	};
 
 	const SecondHandler = evento => {
